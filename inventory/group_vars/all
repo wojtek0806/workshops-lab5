@@ -1,6 +1,6 @@
 ---
 bigip_username: "admin"
 bigip_password: "admin"
-bigip_part: "443"
+bigip_port: "443"a
 bigip_partition: "Foo"
 validate_certs: "no"
