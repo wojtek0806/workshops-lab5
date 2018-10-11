@@ -1,0 +1,7 @@
+---
+# Edit these out accordingly
+
+lic_username: "no@spam.ham.com"
+lic_password: "somepas"
+base_reg_key: "XXX-XXX-XXX-XXX-XXX"
+license_server: "authem.f5net.com"

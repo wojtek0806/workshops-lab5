@@ -1,0 +1,46 @@
+---
+
+vlans:
+  vlan1:
+    name: 'Internal'
+    int: '1.1'
+  vlan2:
+    name: 'External'
+    int: '1.2'
+  vlan3:
+    name: 'HA'
+    int: '1.3'
+
+selfips:
+  ipaddr1:
+    name: 'Internal_non_floating'
+    ip: '10.20.20.100'
+    mask: '255.255.255.0'
+    vlan: 'Internal'
+  ipaddr2:
+    name: 'External_non_floating'
+    ip: '10.30.30.100'
+    mask: '255.255.255.0'
+    vlan: 'External'
+  ipaddr3:
+    name: 'HA_IP'
+    ip: '10.50.50.1'
+    mask: '255.255.255.0'
+    vlan: 'HA'
+  ipaddr4:
+    name: 'Internal_floating'
+    ip: '10.20.20.101'
+    mask: '255.255.255.0'
+    vlan: 'Internal'
+  ipaddr5:
+    name: 'External_floating'
+    ip: '10.30.30.101'
+    mask: '255.255.255.0'
+    vlan: 'External'
+  traff_grp:
+    local: 'traffic-group-local-only'
+    float: 'traffic-group-1'
+
+  failover: "{% raw %}{{ 10.50.50.1 }{ 10.154.62.29 }}{% endraw %}"
+
+

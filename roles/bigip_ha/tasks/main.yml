@@ -1,0 +1,40 @@
+---
+
+- name: Set NTP server
+  bigip_device_ntp:
+      ntp_servers: "{{ ntp_servers }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      validate_certs: "{{ validate_certs }}"
+  delegate_to: localhost
+
+- name: Set timezone
+  bigip_device_ntp:
+      timezone: "{{ timezone }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      validate_certs: "{{ validate_certs }}"
+  delegate_to: localhost
+
+- name: Set hostname on Unit 1
+  bigip_hostname:
+      hostname: "{{ valid_hostname.unit1 }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      validate_certs: "{{ validate_certs }}"
+  with_dict: "{{ valid_hostname }}"
+  delegate_to: localhost
+
+- name: Setup config-sync IP address on Unit 1
+  command: "tmsh modify cm device {{ valid_hostname.unit1 }} configsync-ip {{ csync }}"
+  delegate_to: localhost
+
+- name: Setup failover IP address on Unit 1
+  command: "tmsh modify cm device {{ valid_hostname.unit1 }} unicast-address {{ failover }} "
+  delegate_to: localhost

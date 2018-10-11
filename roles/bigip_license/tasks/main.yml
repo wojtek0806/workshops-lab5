@@ -1,0 +1,9 @@
+---
+
+- name: License BIG-IP
+  bigip_license:
+      server: "{{ license_server }}"
+      username: "{{ lic_username }}"
+      password: "{{ lic_password }}"
+      key: "{{ base_reg_key }}"
+  delegate_to: localhost

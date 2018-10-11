@@ -1,0 +1,142 @@
+---
+
+# You could probably make this more compact, however for the interest of clarity, and since this is supposed
+# not to confuse me or any other ansible newcomers I will leave it like this
+
+- name: Create first vlan and add interface
+  bigip_vlan:
+      name: "{{ vlans.vlan1.name }}"
+      untagged_interfaces: "{{ vlans.vlan1.int }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      validate_certs: "{{ validate_certs }}"
+  with_dict: "{{ vlans }}"
+  delegate_to: localhost
+
+- name: Create second vlan and add interface
+  bigip_vlan:
+      name: "{{ vlans.vlan2.name }}"
+      untagged_interfaces: "{{ vlans.vlan2.int }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      validate_certs: "{{ validate_certs }}"
+  with_dict: "{{ vlans }}"
+  delegate_to: localhost
+
+- name: Create third vlan and add interface
+  bigip_vlan:
+      name: "{{ vlans.vlan3.name }}"
+      untagged_interfaces: "{{ vlans.vlan3.int }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      validate_certs: "{{ validate_certs }}"
+  with_dict: "{{ vlans }}"
+  delegate_to: localhost
+
+- name: Create first non-floating IP
+  bigip_selfip:
+      address: "{{ selfips.ipaddr1.ip }}"
+      name: "{{ selfips.ipaddr1.name }}"
+      netmask: "{{ selfips.ipaddr1.mask }}"
+      default_traffic_group: "{{ selfips.traff_grp.local }}"
+      allow_service:
+          - "none"
+      vlan: "{{ selfips.ipaddr1.vlan }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      validate_certs: "{{ validate_certs }}"
+  with_dict: "{{ selfips }}"
+  delegate_to: localhost
+
+- name: Create second non-floating IP
+  bigip_selfip:
+      address: "{{ selfips.ipaddr2.ip }}"
+      name: "{{ selfips.ipaddr2.name }}"
+      netmask: "{{ selfips.ipaddr2.mask }}"
+      default_traffic_group: "{{ selfips.traff_grp.local }}"
+      allow_service:
+          - "none"
+      vlan: "{{ selfips.ipaddr2.vlan }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      validate_certs: "{{ validate_certs }}"
+  with_dict: "{{ selfips }}"
+  delegate_to: localhost
+
+- name: Create third non-floating IP
+  bigip_selfip:
+      address: "{{ selfips.ipaddr3.ip }}"
+      name: "{{ selfips.ipaddr3.name }}"
+      netmask: "{{ selfips.ipaddr3.mask }}"
+      default_traffic_group: "{{ selfips.traff_grp.local }}"
+      allow_service:
+          - "none"
+      vlan: "{{ selfips.ipaddr3.vlan }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      validate_certs: "{{ validate_certs }}"
+  with_dict: "{{ selfips }}"
+  delegate_to: localhost
+
+- name: Create first floating IP
+  bigip_selfip:
+      address: "{{ selfips.ipaddr4.ip }}"
+      name: "{{ selfips.ipaddr4.name }}"
+      netmask: "{{ selfips.ipaddr4.mask }}"
+      default_traffic_group: "{{ selfips.traff_grp.float }}"
+      allow_service:
+          - "none"
+      vlan: "{{ selfips.ipaddr4.vlan }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      validate_certs: "{{ validate_certs }}"
+  with_dict: "{{ selfips }}"
+  delegate_to: localhost
+
+- name: Create second floating IP
+  bigip_selfip:
+      address: "{{ selfips.ipaddr5.ip }}"
+      name: "{{ selfips.ipaddr5.name }}"
+      netmask: "{{ selfips.ipaddr5.mask }}"
+      default_traffic_group: "{{ selfips.traff_grp.float }}"
+      allow_service:
+          - "none"
+      vlan: "{{ selfips.ipaddr5.vlan }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      validate_certs: "{{ validate_certs }}"
+  with_dict: "{{ selfips }}"
+  delegate_to: localhost
+
+- name: Create first floating IP
+  bigip_selfip:
+      address: "{{ selfips.ipaddr4.ip }}"
+      name: "{{ selfips.ipaddr4.name }}"
+      netmask: "{{ selfips.ipaddr4.mask }}"
+      default_traffic_group: "{{ selfips.traff_grp.float }}"
+      allow_service:
+          - "none"
+      vlan: "{{ selfips.ipaddr4.vlan }}"
+      server_port: "{{ bigip_port }}"
+      user: "{{ bigip_username }}"
+      password: "{{ bigip_password }}"
+      server: "{{ inventory_hostname }}"
+      validate_certs: "{{ validate_certs }}"
+  with_dict: "{{ selfips }}"
+  delegate_to: localhost
